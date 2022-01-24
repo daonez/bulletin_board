@@ -1,0 +1,13 @@
+const mongoose = require("mongoose")
+
+const connect = () => {
+  mongoose.connect("mongodb://localhost:27017/nodejsw1", (error) => {
+    if (error) {
+      console.log("mongodb error", error)
+    } else {
+      console.log("connected")
+    }
+  })
+}
+
+module.exports = connect
