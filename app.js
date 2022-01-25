@@ -22,13 +22,18 @@ const writeRouter = require("./routes/writePage")
 //Router Middleware
 app.use("/api", writeRouter)
 
-app.get("/write", async (req, res) => {
-  res.render("writePage")
-})
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts })
 
   res.render("index", { posts: results })
+})
+app.get("/write", async (req, res) => {
+  res.render("createPost")
+})
+
+app.get("/post/:id", (req, res) => {
+  console.log(req.params)
+  res.send("Hello")
 })
 
 app.listen(port, () => {

@@ -26,8 +26,9 @@
       </a>
 
       <% for( let elements of posts ) { %>
-      <p><%= elements.title %></p>
-      <p><%= elements._id %></p>
+      <a href="/post/<%=elements._id%>"><p><%= elements.title %></p></a>
+
+      <!-- <p><%= elements._id %></p> -->
       <!-- <p><%= elements.body %></p> -->
       <!-- <p><%= elements.createdAt %></p>
       <p><%= elements.updatedAt %></p> -->
