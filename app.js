@@ -20,8 +20,11 @@ app.use(express.urlencoded({ extended: false }))
 const writeRouter = require("./routes/writePage")
 
 //Router Middleware
-app.use("/write", writeRouter)
+app.use("/api", writeRouter)
 
+app.get("/write", async (req, res) => {
+  res.render("writePage")
+})
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts })
 

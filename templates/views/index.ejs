@@ -21,9 +21,9 @@
   <body>
     <div style="padding: 50px">
       <h1>Main Page</h1>
-      <form action="/write" method="GET">
+      <a href="/write">
         <button type="submit">글쓰기</button>
-      </form>
+      </a>
 
       <% for( let elements of posts ) { %>
       <p><%= elements.title %></p>
