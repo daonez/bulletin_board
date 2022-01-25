@@ -24,9 +24,10 @@ router.post("/post", async (req, res) => {
   res.redirect("/")
 })
 
-router.put("/post/:id", async (req, res) => {
+router.patch("/post/:id", async (req, res) => {
+  const _id = req.params.id
   const { title, body } = req.body
-  const posts = await Posts.findOneAndUpdate({ title, body })
+  await Posts.findByIdAndUpdate({ _id }, { title, body })
   res.send({ posts })
   //res.redirect("/")
 })
