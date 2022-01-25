@@ -12,10 +12,12 @@ router.get("/", async (req, res) => {
 // })
 
 router.post("/new", async (req, res) => {
-  const { postId, title, body, createdAt, updatedAt } = req.body
-  const posts = await Posts.create({ postId, title, body, createdAt, updatedAt })
+  const { title, body } = req.body
+  // const posts = await Posts.create({ title, body })
+  await Posts.create({ title, body })
 
-  res.send({ posts })
+  // res.send({ posts })
+  res.redirect("/")
 })
 
 module.exports = router

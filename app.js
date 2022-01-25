@@ -18,7 +18,6 @@ app.use("/", express.static(path.join(__dirname, "public")))
 app.use(express.urlencoded({ extended: false }))
 
 const writeRouter = require("./routes/writePage")
-const { title } = require("process")
 
 //Router Middleware
 app.use("/write", writeRouter)
