@@ -7,14 +7,28 @@ const Posts = require("../schemas/post")
 //   const writtenPosts = await Posts.find({ postId, title, body, createdAt, updatedAt })
 //   res.render("index", {})
 // })
+router.get("/post/:id", async (req, res) => {
+  const _id = req.params.id
+  //res.send(`this page ${id} is`)
+  const results = await Posts.findOne({ _id, ...Posts })
 
-router.post("/new", async (req, res) => {
+  res.render("post", { posts: results })
+})
+
+router.post("/post", async (req, res) => {
   const { title, body } = req.body
   // const posts = await Posts.create({ title, body })
   await Posts.create({ title, body })
 
   // res.send({ posts })
   res.redirect("/")
+})
+
+router.put("/post/:id", async (req, res) => {
+  const { title, body } = req.body
+  const posts = await Posts.findOneAndUpdate({ title, body })
+  res.send({ posts })
+  //res.redirect("/")
 })
 
 module.exports = router

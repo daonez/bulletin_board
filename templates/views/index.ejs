@@ -24,15 +24,17 @@
       <a href="/write">
         <button type="submit">글쓰기</button>
       </a>
-
-      <% for( let elements of posts ) { %>
-      <a href="/post/<%=elements._id%>"><p><%= elements.title %></p></a>
-
-      <!-- <p><%= elements._id %></p> -->
-      <!-- <p><%= elements.body %></p> -->
-      <!-- <p><%= elements.createdAt %></p>
+      <ol>
+        <% for( let elements of posts ) { %>
+        <li>
+          <a href="post/<%=elements._id%>"><p><%= elements.title %></p></a>
+        </li>
+        <!-- <p><%= elements._id %></p> -->
+        <!-- <p><%= elements.body %></p> -->
+        <!-- <p><%= elements.createdAt %></p>
       <p><%= elements.updatedAt %></p> -->
-      <% } %>
+        <% } %>
+      </ol>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

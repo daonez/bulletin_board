@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }))
 const writeRouter = require("./routes/writePage")
 
 //Router Middleware
-app.use("/api", writeRouter)
+app.use("/", writeRouter)
 
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts })
@@ -29,11 +29,6 @@ app.get("/", async (req, res) => {
 })
 app.get("/write", async (req, res) => {
   res.render("createPost")
-})
-
-app.get("/post/:id", (req, res) => {
-  const id = req.params.id
-  res.send(`this page ${id} is`)
 })
 
 app.listen(port, () => {
