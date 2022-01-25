@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 
 const postsSchema = mongoose.Schema({
+  postId: mongoose.SchemaTypes.ObjectId,
   title: {
     type: String,
     required: true,

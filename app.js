@@ -3,6 +3,7 @@ const express = require("express")
 const connect = require("./schemas")
 const app = express()
 const port = 3000
+const Posts = require("./schemas/post")
 connect()
 
 // ejs세팅 (templates 폴더에서 필요한 내용들 읽기)
@@ -17,12 +18,15 @@ app.use("/", express.static(path.join(__dirname, "public")))
 app.use(express.urlencoded({ extended: false }))
 
 const writeRouter = require("./routes/writePage")
+const { title } = require("process")
 
 //Router Middleware
 app.use("/write", writeRouter)
 
-app.get("/", (req, res) => {
-  res.render("index")
+app.get("/", async (req, res) => {
+  const results = await Posts.find({ ...Posts })
+
+  res.render("index", { posts: results })
 })
 
 app.listen(port, () => {
