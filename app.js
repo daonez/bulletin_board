@@ -32,8 +32,8 @@ app.get("/write", async (req, res) => {
 })
 
 app.get("/post/:id", (req, res) => {
-  console.log(req.params)
-  res.send("Hello")
+  const id = req.params.id
+  res.send(`this page ${id} is`)
 })
 
 app.listen(port, () => {
