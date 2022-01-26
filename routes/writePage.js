@@ -37,8 +37,10 @@ router.post("/post", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const _id = req.params.id
   const { title, body } = req.body
-  await Posts.findByIdAndUpdate({ _id }, { title, body })
-  res.send({ posts })
+  console.log(req.body)
+  const post = await Posts.findOneAndUpdate({ _id }, { title, body })
+  console.log(post)
+  res.send({ post })
   //res.redirect("/")
 })
 

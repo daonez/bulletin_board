@@ -7,19 +7,37 @@
     <title>Document</title>
   </head>
   <body>
-      
-      <p><input type="text" name="title" value="<%= posts.title%>" /></p>
-      <p><input type="text" name="author" value="<%=posts.author%>" /></p>
-      <input type="text" name="createdDate" value="<%= posts.createdAt%>" />
-      <input type="password" name="password" />
-      <p>
-        <textarea name="body"><%= posts.body %></textarea>
-      </p>
-      <button type="button" id="editBtn" data-id="<%=posts.id%>">수정하기</button>
-      <button type="button" id="delBtn" data-id="<%=posts.id%>" onclick='deletePost("<%=posts.id%>")' >삭제하기</button>
-    
+    <p><input type="text" name="title" value="<%= posts.title%>" id="title" /></p>
+    <p><input type="text" name="author" value="<%=posts.author%>" /></p>
+    <input type="text" name="createdDate" value="<%= posts.createdAt%>" />
+    <input type="password" name="password" />
+    <p>
+      <textarea name="body" id="body"><%= posts.body %></textarea>
+    </p>
+    <button
+      type="button"
+      id="editBtn"
+      data-id="<%=posts.id%>"
+      onclick="editPost(
+     '<%= posts.id%>',
+     document.getElementById('title').value,
+     document.getElementById('body').value,
+)"
+    >
+      수정하기
+    </button>
+    <button
+      type="button"
+      id="delBtn"
+      data-id="<%=posts.id%>"
+      onclick='deletePost("<%=posts.id%>")'
+    >
+      삭제하기
+    </button>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="index.js"></script>
   </body>
-</html>
+</html
+>
