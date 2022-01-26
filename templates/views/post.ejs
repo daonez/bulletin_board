@@ -7,7 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-      <a href=""></a>
+      
       <p><input type="text" name="title" value="<%= posts.title%>" /></p>
       <p><input type="text" name="author" value="<%=posts.author%>" /></p>
       <input type="text" name="createdDate" value="<%= posts.createdAt%>" />
@@ -16,7 +16,7 @@
         <textarea name="body"><%= posts.body %></textarea>
       </p>
       <button type="button" id="editBtn" data-id="<%=posts.id%>">수정하기</button>
-      <button type="button" id="delBtn" data-id="<%=posts.id%>">삭제하기</button>
+      <button type="button" id="delBtn" data-id="<%=posts.id%>" data-method='DELETE'>삭제하기</button>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

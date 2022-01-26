@@ -28,7 +28,7 @@ router.post("/post", async (req, res) => {
   res.redirect("/")
 })
 
-router.patch("/post/:id", async (req, res) => {
+router.patch(":id", async (req, res) => {
   const _id = req.params.id
   const { title, body } = req.body
   await Posts.findByIdAndUpdate({ _id }, { title, body })
@@ -36,11 +36,12 @@ router.patch("/post/:id", async (req, res) => {
   //res.redirect("/")
 })
 
-router.delete("/post/:id", async (req, res) => {
+router.delete(":id", async (req, res) => {
   try {
     const _id = req.params.id
-    const post = await Posts.findOneAndDelete({ _id })
-    res.send(post)
+    const post = await Posts.findOneAndDelete({ postId: _id })
+    console.log(post)
+    res.redirect("/")
   } catch (e) {
     res.status(500).send()
   }
