@@ -14,9 +14,15 @@ router.get("/write", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const _id = req.params.id
   //res.send(`this page ${id} is`)
-  const results = await Posts.findOne({ _id, ...Posts })
-
-  res.render("post", { posts: results })
+  try {
+    const results = await Posts.findOne({ _id, ...Posts })
+    if (!results) {
+      res.status(404).send()
+    }
+    res.render("post", { posts: results })
+  } catch (e) {
+    res.status(500).send()
+  }
 })
 
 router.post("/post", async (req, res) => {
@@ -28,7 +34,7 @@ router.post("/post", async (req, res) => {
   res.redirect("/")
 })
 
-router.patch(":id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   const _id = req.params.id
   const { title, body } = req.body
   await Posts.findByIdAndUpdate({ _id }, { title, body })
@@ -36,12 +42,14 @@ router.patch(":id", async (req, res) => {
   //res.redirect("/")
 })
 
-router.delete(":id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
+    console.log(req.params.id)
     const _id = req.params.id
-    const post = await Posts.findOneAndDelete({ postId: _id })
+    const post = await Posts.findOneAndDelete({ _id: _id })
     console.log(post)
-    res.redirect("/")
+    res.status(204).send(post)
+    // res.redirect("/")
   } catch (e) {
     res.status(500).send()
   }

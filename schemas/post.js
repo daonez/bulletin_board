@@ -11,14 +11,13 @@ const postsSchema = new mongoose.Schema({
     required: true,
   },
   password: {
-    type: Number,
+    type: String,
     required: true,
   },
   author: {
     type: String,
     required: true,
     lowercase: true,
-    unique: true,
   },
   createdAt: {
     type: Date,

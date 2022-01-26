@@ -16,8 +16,8 @@
         <textarea name="body"><%= posts.body %></textarea>
       </p>
       <button type="button" id="editBtn" data-id="<%=posts.id%>">수정하기</button>
-      <button type="button" id="delBtn" data-id="<%=posts.id%>" data-method='DELETE'>삭제하기</button>
-    </form>
+      <button type="button" id="delBtn" data-id="<%=posts.id%>" onclick='deletePost("<%=posts.id%>")' >삭제하기</button>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="index.js"></script>
