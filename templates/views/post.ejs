@@ -15,13 +15,13 @@
 
   <body>
     <p><input type="text" name="title" value="<%= posts.title%>" id="title" readonly /></p>
-    <p><input type="text" name="author" value="<%=posts.author%>" readonly /></p>
-    <p><input type="password" name="password" readonly /></p>
-    <p><%= posts.createdAt%></p>
-
     <p>
       <textarea name="body" id="body" readonly><%= posts.body %></textarea>
     </p>
+    <p><%= posts.createdAt%></p>
+    <p><input type="text" name="author" value="<%=posts.author%>" readonly /></p>
+    <p><input type="password" name="password" readonly /></p>
+
     <button
       style="display: none"
       type="button"
@@ -35,7 +35,7 @@
     >
       수정하기
     </button>
-    <button type="button" id="makeEditable" onclick="makeEditable()">makeEdit</button>
+    <button type="button" id="makeEditable" onclick="makeEditable()">수정</button>
     <button
       type="button"
       id="delBtn"
