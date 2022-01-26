@@ -19,7 +19,7 @@
       <textarea name="body" id="body" readonly><%= posts.body %></textarea>
     </p>
     <p><%= posts.createdAt%></p>
-    <p><input type="text" name="author" id="author" value="<%=posts.author%>" readonly /></p>
+    <p><%=posts.author%></p>
     <p><input type="password" name="password" id="password" /></p>
 
     <button
@@ -31,20 +31,19 @@
      '<%= posts.id%>',
      document.getElementById('title').value,
      document.getElementById('body').value,
-     document.getElementById('author').value,
      document.getElementById('password').value,
 
      
 )"
     >
-      수정하기
+      수정완료
     </button>
     <button type="button" id="makeEditable" onclick="makeEditable()">수정</button>
     <button
       type="button"
       id="delBtn"
       data-id="<%=posts.id%>"
-      onclick="deletePost('<%=posts.id%>',document.getElementById('author').value,
+      onclick="deletePost('<%=posts.id%>',
      document.getElementById('password').value,)"
     >
       삭제하기
