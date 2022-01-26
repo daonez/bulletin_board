@@ -13,14 +13,15 @@ async function deletePost(id) {
   }
 }
 
-async function editPost(_id, title, body) {
+async function editPost(_id, title, body, author, password) {
   try {
-    const res = await axios.patch(`/${_id}`, { title, body })
-    console.log(res)
+    const res = await axios.patch(`/${_id}`, { title, body, author, password })
+
     if (res.status === 204) {
       window.location.replace("/")
     }
   } catch (err) {
+    window.alert("wrong info was given")
     console.log(err)
   }
 }

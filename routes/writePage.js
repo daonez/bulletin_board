@@ -36,11 +36,24 @@ router.post("/post", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   const _id = req.params.id
-  const { title, body } = req.body
-  console.log(req.body)
-  const post = await Posts.findOneAndUpdate({ _id }, { title, body })
-  console.log(post)
-  res.send({ post })
+  const { title, body, author, password } = req.body
+  try {
+    const originalPost = await Posts.findOne({ _id })
+    // console.log(originalPost)
+    // console.log(originalPost.author)
+    if (
+      originalPost.author === req.body.author &&
+      originalPost.password === req.body.password
+    ) {
+      const post = await Posts.findOneAndUpdate({ _id }, { title, body, author, password })
+      res.status(204).send(post)
+    } else {
+      res.status(403).send()
+    }
+  } catch (error) {
+    res.status(500).send()
+  }
+
   //res.redirect("/")
 })
 

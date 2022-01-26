@@ -19,8 +19,8 @@
       <textarea name="body" id="body" readonly><%= posts.body %></textarea>
     </p>
     <p><%= posts.createdAt%></p>
-    <p><input type="text" name="author" value="<%=posts.author%>" readonly /></p>
-    <p><input type="password" name="password" readonly /></p>
+    <p><input type="text" name="author" id="author" value="<%=posts.author%>" readonly /></p>
+    <p><input type="password" name="password" id="password" readonly /></p>
 
     <button
       style="display: none"
@@ -31,6 +31,10 @@
      '<%= posts.id%>',
      document.getElementById('title').value,
      document.getElementById('body').value,
+     document.getElementById('author').value,
+     document.getElementById('password').value,
+
+     
 )"
     >
       수정하기
