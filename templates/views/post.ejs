@@ -9,10 +9,13 @@
   <body>
     <form action="/post" method="GET">
       <p><input type="text" name="title" value="<%= posts.title%>" /></p>
+      <input type="text" name="author" />
+      <input type="password" name="password" />
       <p>
         <textarea name="body"><%= posts.body %></textarea>
       </p>
       <button type="button">수정하기</button>
+      <button type="button">삭제하기</button>
     </form>
   </body>
 </html>

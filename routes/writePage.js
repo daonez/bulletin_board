@@ -16,9 +16,9 @@ router.get("/post/:id", async (req, res) => {
 })
 
 router.post("/post", async (req, res) => {
-  const { title, body } = req.body
+  const { title, body, author, password } = req.body
   // const posts = await Posts.create({ title, body })
-  await Posts.create({ title, body })
+  await Posts.create({ title, body, author, password })
 
   // res.send({ posts })
   res.redirect("/")

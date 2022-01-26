@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const postsSchema = mongoose.Schema({
+const postsSchema = new mongoose.Schema({
   postId: mongoose.SchemaTypes.ObjectId,
   title: {
     type: String,
@@ -9,6 +9,15 @@ const postsSchema = mongoose.Schema({
   body: {
     type: String,
     required: true,
+  },
+  password: {
+    type: Number,
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+    lowercase: true,
   },
   createdAt: {
     type: Date,
@@ -19,6 +28,12 @@ const postsSchema = mongoose.Schema({
     type: Date,
     default: () => Date.now(),
   },
+  
+})
+
+postsSchema.pre("save", function (next) {
+  this.updatedAt = Date.now()
+  next()
 })
 
 module.exports = mongoose.model("Posts", postsSchema)
