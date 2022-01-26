@@ -27,9 +27,7 @@ app.get("/", async (req, res) => {
 
   res.render("index", { posts: results })
 })
-app.get("/write", async (req, res) => {
-  res.render("createPost")
-})
+
 
 app.listen(port, () => {
   console.log("running on port", port)

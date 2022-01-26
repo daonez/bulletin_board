@@ -56,17 +56,18 @@
       <ol>
         <% for( let elements of posts ) { %>
         <li>
-          <a href="post/<%=elements._id%>"><p><%= elements.title %></p></a>
+          <a href="/<%=elements._id%>"><p><%= elements.title %></p></a>
         </li>
         <!-- <p><%= elements._id %></p> -->
         <!-- <p><%= elements.body %></p> -->
-        <!-- <p><%= elements.createdAt %></p>
-      <p><%= elements.updatedAt %></p> -->
+        <p><%= elements.createdAt %></p>
+        <!--<p><%= elements.updatedAt %></p>
+        -->
         <% } %>
       </ol>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/public/index.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>

@@ -18,6 +18,7 @@ const postsSchema = new mongoose.Schema({
     type: String,
     required: true,
     lowercase: true,
+    unique: true,
   },
   createdAt: {
     type: Date,
@@ -28,7 +29,6 @@ const postsSchema = new mongoose.Schema({
     type: Date,
     default: () => Date.now(),
   },
-  
 })
 
 postsSchema.pre("save", function (next) {

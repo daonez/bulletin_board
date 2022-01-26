@@ -7,7 +7,11 @@ const Posts = require("../schemas/post")
 //   const writtenPosts = await Posts.find({ postId, title, body, createdAt, updatedAt })
 //   res.render("index", {})
 // })
-router.get("/post/:id", async (req, res) => {
+router.get("/write", async (req, res) => {
+  res.render("createPost")
+})
+
+router.get("/:id", async (req, res) => {
   const _id = req.params.id
   //res.send(`this page ${id} is`)
   const results = await Posts.findOne({ _id, ...Posts })
@@ -30,6 +34,16 @@ router.patch("/post/:id", async (req, res) => {
   await Posts.findByIdAndUpdate({ _id }, { title, body })
   res.send({ posts })
   //res.redirect("/")
+})
+
+router.delete("/post/:id", async (req, res) => {
+  try {
+    const _id = req.params.id
+    const post = await Posts.findOneAndDelete({ _id })
+    res.send(post)
+  } catch (e) {
+    res.status(500).send()
+  }
 })
 
 module.exports = router
