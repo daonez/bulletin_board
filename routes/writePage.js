@@ -39,8 +39,7 @@ router.patch("/:id", async (req, res) => {
   const { title, body, author, password } = req.body
   try {
     const originalPost = await Posts.findOne({ _id })
-    // console.log(originalPost)
-    // console.log(originalPost.author)
+
     if (
       originalPost.author === req.body.author &&
       originalPost.password === req.body.password
@@ -59,11 +58,21 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    console.log(req.params.id)
+    const { author, password } = req.body
     const _id = req.params.id
-    const post = await Posts.findOneAndDelete({ _id: _id })
-    console.log(post)
-    res.status(204).send(post)
+    console.log(req.params)
+    const originalPost = await Posts.findOne({ _id })
+    console.log(originalPost)
+    if (
+      originalPost.author === req.body.author &&
+      originalPost.password === req.body.password
+    ) {
+      const post = await Posts.findOneAndDelete({ _id: _id })
+      res.status(204).send(post)
+    } else {
+      res.status(403).send()
+    }
+
     // res.redirect("/")
   } catch (e) {
     res.status(500).send()

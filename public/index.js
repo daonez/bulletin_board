@@ -1,9 +1,9 @@
-async function deletePost(id) {
+async function deletePost(id, author, password) {
   //const id = window.location.pathname.replace(/^\/([^\/]*).*$/, "$1")
 
   try {
     console.log(id)
-    const res = await axios.delete(`/${id}`, { params: {} })
+    const res = await axios.delete(`/${id}`, { data: { author, password } })
     console.log(res)
     if (res.status === 204) {
       window.location.replace("/")
