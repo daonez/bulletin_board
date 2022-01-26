@@ -5,16 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      :read-only {
+        border: none;
+        outline: none;
+      }
+    </style>
   </head>
+
   <body>
-    <p><input type="text" name="title" value="<%= posts.title%>" id="title" /></p>
-    <p><input type="text" name="author" value="<%=posts.author%>" /></p>
-    <input type="text" name="createdDate" value="<%= posts.createdAt%>" />
-    <input type="password" name="password" />
+    <p><input type="text" name="title" value="<%= posts.title%>" id="title" readonly /></p>
+    <p><input type="text" name="author" value="<%=posts.author%>" readonly /></p>
+    <p><input type="password" name="password" readonly /></p>
+    <p><%= posts.createdAt%></p>
+
     <p>
-      <textarea name="body" id="body"><%= posts.body %></textarea>
+      <textarea name="body" id="body" readonly><%= posts.body %></textarea>
     </p>
     <button
+      style="display: none"
       type="button"
       id="editBtn"
       data-id="<%=posts.id%>"
@@ -26,6 +35,7 @@
     >
       수정하기
     </button>
+    <button type="button" id="makeEditable" onclick="makeEditable()">makeEdit</button>
     <button
       type="button"
       id="delBtn"
@@ -35,6 +45,7 @@
       삭제하기
     </button>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="edit.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
