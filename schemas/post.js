@@ -20,7 +20,6 @@ const postsSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    
   },
   author: {
     type: String,

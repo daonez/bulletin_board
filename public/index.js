@@ -1,3 +1,28 @@
+async function writePost(title, author, body, password) {
+  try {
+    const res = await axios.post("/post", { title, author, password, body })
+
+    if (res.status === 204) {
+      window.location.replace("/")
+    }
+  } catch (err) {
+    if (err === 400) {
+      window.alert("작성할 내용을 입력해주세요")
+    } else if (author === "") {
+      window.alert("작성자를 입력해주세요")
+    } else if (body === "") {
+      window.alert("작성할 내용이 없습니다")
+    } else if (password === "") {
+      window.alert("비밀번호를 입력해주세요")
+    } else if (title === "") {
+      window.alert("제목이 없습니다")
+    } else {
+      window.alert("작성글이 없습니다")
+      console.log(err)
+    }
+  }
+}
+
 async function deletePost(id, password) {
   try {
     const res = await axios.delete(`/${id}`, { data: { password } })

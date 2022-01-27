@@ -5,7 +5,7 @@
     <div class="section">
       <%- include('../partials/nav.ejs') %>
       
-      <form action="/post" method="POST">
+    
             <p>
           <input type="text" name="title" id='title' placeholder="제목을 입력해주세요" class="inputs" />
         </p>
@@ -33,9 +33,16 @@
         <p >
           <textarea name="body" id='body' placeholder="작성할 내용을 입력해주세요" class='textarea-placeholder'></textarea>
         </p>
-        <input type="submit" placeholder="글쓰기"></input>
-</form>
+        <input type="button" onclick="writePost(document.getElementById('title').value,
+     document.getElementById('body').value,
+     document.getElementById('password').value,
+     document.getElementById('title').value,
+     document.getElementById('author').value)"
+     >글쓰기</input>
+
       <%- include('../partials/footer.ejs') %>
      </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+     <script src="index.js"></script>
   </body>
 </html>

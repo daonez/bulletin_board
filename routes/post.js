@@ -2,11 +2,6 @@ const express = require("express")
 const router = express.Router()
 const Posts = require("../schemas/post")
 
-// app.get("/post", async (req, res) => {
-//   const { postId, title, body, createdAt, updatedAt } = req.query
-//   const writtenPosts = await Posts.find({ postId, title, body, createdAt, updatedAt })
-//   res.render("index", {})
-// })
 router.get("/write", async (req, res) => {
   res.render("createPost")
 })
@@ -27,9 +22,15 @@ router.get("/:id", async (req, res) => {
 })
 
 router.post("/post", async (req, res) => {
-  const { title, body, author, password } = req.body
-  await Posts.create({ title, body, author, password })
-  res.redirect("/")
+    const { title, body, author, password } = req.body
+  
+  try {
+  
+    const results = await Posts.create({ title, body, author, password })
+    res.status(204).send(results)
+  } catch (e) {
+    res.status(400).send(e)
+  }
 })
 
 router.patch("/:id", async (req, res) => {
@@ -47,8 +48,6 @@ router.patch("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).send()
   }
-
-  //res.redirect("/")
 })
 
 router.delete("/:id", async (req, res) => {
