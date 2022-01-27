@@ -27,7 +27,6 @@ app.use("/", postRouter)
 
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts }).sort({ _id: -1 })
-  console.log(results)
 
   res.render("index", { posts: results })
 })

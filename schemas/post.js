@@ -1,11 +1,14 @@
 const mongoose = require("mongoose")
+const autoIncrement = require("mongoose-auto-increment")
+autoIncrement.initialize(mongoose.connection)
 
 const postsSchema = new mongoose.Schema({
   postId: mongoose.SchemaTypes.ObjectId,
   postNum: {
     type: Number,
-    unique: true,
+    default: 0,
   },
+
   title: {
     type: String,
     required: true,
@@ -18,7 +21,7 @@ const postsSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 5,
-    maxlength: 10,
+    maxlength: 20,
   },
   author: {
     type: String,
@@ -38,7 +41,14 @@ const postsSchema = new mongoose.Schema({
 
 postsSchema.pre("save", function (next) {
   this.updatedAt = Date.now()
+
   next()
+})
+postsSchema.plugin(autoIncrement.plugin, {
+  model: "posts", //모델명
+  field: "postNum", //자동증가할 db컬럼명
+  startAt: 1, //시작
+  increment: 1, // 증가
 })
 
 module.exports = mongoose.model("Posts", postsSchema)

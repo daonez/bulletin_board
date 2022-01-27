@@ -1,26 +1,16 @@
-function getCurrentDate() {
-  var date = new Date()
-  var year = date.getFullYear()
-  var month = date.getMonth()
-  var today = date.getDate()
-  var hours = date.getHours()
-  var minutes = date.getMinutes()
-  var seconds = date.getSeconds()
-  var milliseconds = date.getMilliseconds()
-  return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds))
-}
-
 async function deletePost(id, password) {
-  //const id = window.location.pathname.replace(/^\/([^\/]*).*$/, "$1")
-
   try {
-    console.log(id)
     const res = await axios.delete(`/${id}`, { data: { password } })
-    console.log(res)
+
     if (res.status === 204) {
       window.location.replace("/")
     }
   } catch (err) {
+    if (password === "") {
+      window.alert("비밀번호를 입력해주세요, 최소5글자 최대 20글자입니다!")
+    } else if (password.length <= 5) {
+      window.alert("비밀번호의 길이는 최소 5글자 최대 20글자입니다")
+    }
     console.log(err)
   }
 }
@@ -33,7 +23,7 @@ async function editPost(_id, title, body, password) {
       window.location.reload()
     }
   } catch (err) {
-    window.alert("wrong info was given")
+    window.alert("비밀번호를 입력해주세요")
     console.log(err)
   }
 }

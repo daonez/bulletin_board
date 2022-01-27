@@ -2,20 +2,40 @@
 <html lang="en">
   <%- include('../partials/header.ejs') %>
   <body>
-    <%- include('../partials/nav.ejs') %>
-    <h1>Write something</h1>
-    <form action="/post" method="POST">
-      <p>
-        <input type="text" name="title" placeholder="title" />
-
-        <input type="text" name="author" placeholder="author" />
-        <input type="password" name="password" placeholder="PW" />
-      </p>
-      <p>
-        <textarea name="body" placeholder="content"></textarea>
-      </p>
-      <input type="submit" />
-    </form>
-    <%- include('../partials/footer.ejs') %>
+    <div class="section">
+      <%- include('../partials/nav.ejs') %>
+      
+      <form action="/post" method="POST">
+            <p>
+          <input type="text" name="title" id='title' placeholder="제목을 입력해주세요" class="inputs" />
+        </p>
+        <div class='info-placehoder'>
+        <span class='user-info'>
+          <input
+            type="text"
+            name="author"
+            placeholder="작성자명을 입력해주세요"
+            class="inputs"
+            id='author'
+          />
+          </span>
+          <span class='user-info'>
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호를 입력해주세요"
+            class="inputs"
+            id='password'
+          />
+          </span>
+        </p>
+        </div>
+        <p >
+          <textarea name="body" id='body' placeholder="작성할 내용을 입력해주세요" class='textarea-placeholder'></textarea>
+        </p>
+        <input type="submit" placeholder="글쓰기"></input>
+</form>
+      <%- include('../partials/footer.ejs') %>
+     </div>
   </body>
 </html>

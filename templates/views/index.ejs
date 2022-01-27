@@ -3,7 +3,7 @@
  <%- include('../partials/header.ejs') %>
   <body>
    
-    <div style="padding: 50px">
+    <div class='section'>
    
      
        <%- include('../partials/nav.ejs') %>
@@ -24,14 +24,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         
-          <li class="nav-item">
-              <a href="/write">
+         <a href="/write">
         <button type="submit">글쓰기</button>
-          </li>
-          <li class="nav-item dropdown">
-           
-          </li>
+        </a>
+        
          </ul>
         <form class="d-flex">
           <input
@@ -45,21 +41,34 @@
       </div>
     </div>
   </nav>
-      <ul>
-        <% for( let elements of posts ) { %>
-        <li>
-          <a href="/<%=elements._id%>"><p><%= elements.title %></p></a>
-        </li>
-        <!-- <p><%= elements._id %></p> -->
-        <!-- <p><%= elements.body %></p> -->
-        <p><%=elements.createdAt.toLocaleString('ko-KR')%></p>
-        <!--<p><%= elements.updatedAt %></p>
-        -->
-        <% } %>
-      </ol>
-    </div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="index.js"></script>
+  <table class="table table-striped">
+    
+   <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">제목</th>
+      <th scope="col">작성자</th>
+      <th scope="col">작성일</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% for( let elements of posts ) { %>
+    <tr>
+      <th scope="row"><%= elements.postNum %></th>
+      <td> <a href="/<%=elements._id%>"><p><%= elements.title %></p></a></td>
+      <td><%= elements.author %></td>
+      <td><%=elements.createdAt.toLocaleString('ko-KR')%></td>
+    </tr>
+     <% } %>
+  </tbody>
+</table>
+     
+    
+   
     <%- include('../partials/footer.ejs') %>
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="dist/timeago.min.js"></script>
+    <script src="index.js"></script>
+   </div>
   </body>
 </html>

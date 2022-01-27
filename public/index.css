@@ -1,4 +1,30 @@
-:read-only {
-        border: none;
-        outline: none;
-      }
+.section {
+  width: 80%;
+  margin: auto;
+}
+
+.inputs {
+  width: 100%;
+  text-align: center;
+}
+
+.info-placehoder {
+  display: flex;
+  justify-content: center;
+}
+.posts-placehoder {
+  display: flex;
+  justify-content: space-evenly;
+}
+.user-info {
+  width: 60%;
+  padding: 20px;
+}
+.textarea-placeholder {
+  width: 100%;
+}
+textarea {
+  width: 500px;
+  height: 100px;
+  resize: none;
+}

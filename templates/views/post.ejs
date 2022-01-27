@@ -3,22 +3,44 @@
   <%- include('../partials/header.ejs') %>
 
   <body>
-    <%- include('../partials/nav.ejs') %>
+    <div class="section">
+      <%- include('../partials/nav.ejs') %>
 
-    <p><input type="text" name="title" value="<%= posts.title%>" id="title" readonly /></p>
-    <p>
-      <textarea name="body" id="body" readonly><%= posts.body %></textarea>
-    </p>
-    <p><%= posts.createdAt.toLocaleString('ko-KR')%></p>
-    <p><%=posts.author%></p>
-    <p><input type="password" name="password" id="password" /></p>
-
-    <button
-      style="display: none"
-      type="button"
-      id="editBtn"
-      data-id="<%=posts.id%>"
-      onclick="editPost(
+      <p>
+        <input
+          type="text"
+          name="title"
+          value="<%= posts.title%>"
+          id="title"
+          readonly
+          class="inputs"
+        />
+      </p>
+      <p>
+        <textarea name="body" id="body" readonly class="textarea-placeholder">
+<%= posts.body %></textarea
+        >
+      </p>
+      <div class="posts-placehoder">
+        <label
+          >작성날짜:
+          <span class="inputs"><%= posts.createdAt.toLocaleString('ko-KR')%></span>
+        </label>
+        <label
+          >작성자:
+          <span class="inputs"><%=posts.author%></span>
+        </label>
+        <label
+          >비밀번호:
+          <span><input type="password" name="password" id="password" /></span>
+        </label>
+      </div>
+      <button
+        style="display: none"
+        type="button"
+        id="editBtn"
+        data-id="<%=posts.id%>"
+        onclick="editPost(
      '<%= posts.id%>',
      document.getElementById('title').value,
      document.getElementById('body').value,
@@ -26,22 +48,24 @@
 
      
 )"
-    >
-      수정완료
-    </button>
-    <button type="button" id="makeEditable" onclick="makeEditable()">수정</button>
-    <button
-      type="button"
-      id="delBtn"
-      data-id="<%=posts.id%>"
-      onclick="deletePost('<%=posts.id%>',
+      >
+        수정완료
+      </button>
+      <button type="button" id="makeEditable" onclick="makeEditable()">수정</button>
+      <button
+        type="button"
+        id="delBtn"
+        data-id="<%=posts.id%>"
+        onclick="deletePost('<%=posts.id%>',
      document.getElementById('password').value,)"
-    >
-      삭제하기
-    </button>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="edit.js"></script>
-    <script src="index.js"></script>
-    <%- include('../partials/footer.ejs') %>
+      >
+        삭제하기
+      </button>
+
+      <%- include('../partials/footer.ejs') %>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="edit.js"></script>
+      <script src="index.js"></script>
+    </div>
   </body>
 </html>
