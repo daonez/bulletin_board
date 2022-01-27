@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      :read-only {
-        border: none;
-        outline: none;
-      }
-    </style>
-  </head>
+  <%- include('../partials/header.ejs') %>
 
   <body>
+    <%- include('../partials/nav.ejs') %>
+
     <p><input type="text" name="title" value="<%= posts.title%>" id="title" readonly /></p>
     <p>
       <textarea name="body" id="body" readonly><%= posts.body %></textarea>
@@ -51,5 +42,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="edit.js"></script>
     <script src="index.js"></script>
+    <%- include('../partials/footer.ejs') %>
   </body>
 </html>

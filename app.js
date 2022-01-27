@@ -9,6 +9,7 @@ connect()
 
 // ejs세팅 (templates 폴더에서 필요한 내용들 읽기)
 const viewsPath = path.join(__dirname, "./templates/views")
+
 app.set("view engine", "ejs")
 app.set("views", viewsPath)
 
