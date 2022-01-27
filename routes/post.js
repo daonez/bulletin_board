@@ -22,10 +22,8 @@ router.get("/:id", async (req, res) => {
 })
 
 router.post("/post", async (req, res) => {
-    const { title, body, author, password } = req.body
-  
   try {
-  
+    const { title, body, author, password } = req.body
     const results = await Posts.create({ title, body, author, password })
     res.status(204).send(results)
   } catch (e) {

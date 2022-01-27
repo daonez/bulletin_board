@@ -33,8 +33,6 @@ async function deletePost(id, password) {
   } catch (err) {
     if (password === "") {
       window.alert("비밀번호를 입력해주세요, 최소5글자 최대 20글자입니다!")
-    } else if (password.length <= 5) {
-      window.alert("비밀번호의 길이는 최소 5글자 최대 20글자입니다")
     }
     console.log(err)
   }
