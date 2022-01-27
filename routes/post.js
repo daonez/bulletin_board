@@ -13,9 +13,10 @@ router.get("/write", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const _id = req.params.id
-  //res.send(`this page ${id} is`)
+
   try {
     const results = await Posts.findOne({ _id, ...Posts })
+    console.log(results)
     if (!results) {
       res.status(404).send()
     }

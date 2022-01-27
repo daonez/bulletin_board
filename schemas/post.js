@@ -13,6 +13,8 @@ const postsSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    minlength: 5,
+    maxlength: 10,
   },
   author: {
     type: String,
@@ -22,11 +24,11 @@ const postsSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     immutable: true,
-    default: () => Date.now(),
+    default: new Date(),
   },
   updatedAt: {
     type: Date,
-    default: () => Date.now(),
+    default: new Date(),
   },
 })
 

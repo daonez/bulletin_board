@@ -18,7 +18,7 @@
     <p>
       <textarea name="body" id="body" readonly><%= posts.body %></textarea>
     </p>
-    <p><%= posts.createdAt%></p>
+    <p><%= posts.createdAt.toLocaleString('ko-KR')%></p>
     <p><%=posts.author%></p>
     <p><input type="password" name="password" id="password" /></p>
 

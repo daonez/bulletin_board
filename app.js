@@ -19,13 +19,14 @@ app.use("/", express.static(path.join(__dirname, "public")))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const writeRouter = require("./routes/writePage")
+const postRouter = require("./routes/post")
 
 //Router Middleware
-app.use("/", writeRouter)
+app.use("/", postRouter)
 
 app.get("/", async (req, res) => {
-  const results = await Posts.find({ ...Posts })
+  const results = await Posts.find({ ...Posts }).sort({ _id: -1 })
+  console.log(results)
 
   res.render("index", { posts: results })
 })
