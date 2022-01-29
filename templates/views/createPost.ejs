@@ -4,13 +4,18 @@
   <body>
     <div class="section">
       <%- include('../partials/nav.ejs') %>
-      
-    
-            <p>
+          <p>
           <input type="text" name="title" id='title' placeholder="제목을 입력해주세요" class="inputs" />
         </p>
-        <div class='info-placehoder'>
+        <div class='info-placeholder'>
         <span class='user-info'>
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호를 입력해주세요"
+            class="inputs"
+            id='password'
+          />
           <input
             type="text"
             name="author"
@@ -20,29 +25,24 @@
           />
           </span>
           <span class='user-info'>
-          <input
-            type="password"
-            name="password"
-            placeholder="비밀번호를 입력해주세요"
-            class="inputs"
-            id='password'
-          />
+          
           </span>
         </p>
         </div>
         <p >
           <textarea name="body" id='body' placeholder="작성할 내용을 입력해주세요" class='textarea-placeholder'></textarea>
         </p>
-        <input type="button" onclick="writePost(document.getElementById('title').value,
-     document.getElementById('body').value,
-     document.getElementById('password').value,
-     document.getElementById('title').value,
-     document.getElementById('author').value)"
-     >글쓰기</input>
+        <button type="submit" onclick="writePost(
+          document.getElementById('title').value,
+          document.getElementById('password').value,
+          document.getElementById('author').value,     
+     document.getElementById('body').value)"
+     >글쓰기</button>
 
       <%- include('../partials/footer.ejs') %>
      </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
      <script src="index.js"></script>
+     
   </body>
 </html>

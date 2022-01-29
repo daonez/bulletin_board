@@ -23,10 +23,13 @@ router.get("/:id", async (req, res) => {
 
 router.post("/post", async (req, res) => {
   try {
-    const { title, body, author, password } = req.body
-    const results = await Posts.create({ title, body, author, password })
+    console.log(req.body)
+    const { title, password, author, body } = req.body
+    const results = await Posts.create({ title, password, author, body })
+    console.log(results)
     res.status(204).send(results)
   } catch (e) {
+    console.log(e)
     res.status(400).send(e)
   }
 })
