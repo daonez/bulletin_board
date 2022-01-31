@@ -1,10 +1,18 @@
 const express = require("express")
-const { off } = require("../models/user")
 const router = express.Router()
-const Users = require("../models/user")
+const User = require("../models/user")
+
+router.get("/users", async (req, res) => {
+  const results = await User.find({})
+  try {
+    res.send(results)
+  } catch (e) {
+    res.status(500).send()
+  }
+})
 
 router.post("/users", async (req, res) => {
-  const user = new Users(req.body)
+  const user = new User(req.body)
 
   try {
     await user.save()
@@ -14,13 +22,25 @@ router.post("/users", async (req, res) => {
   }
 })
 
+//로그인 라우터 endpoint
+router.post("/users/login", async (req, res) => {
+  try {
+    const user = await User.findByCredentials(req.body.email, req.body.password)
+    console.log(user)
+    res.send(user)
+  } catch (e) {
+    console.log(e)
+    res.status(400).send(e)
+  }
+})
+
 router.get("/users/:id", async (req, res) => {
   const _id = req.params.id
   console.log(_id)
 
   try {
-    const user = await Users.findById({ _id })
-    if (user) {
+    const user = await User.findById({ _id })
+    if (!user) {
       return res.status(404).send()
     }
     res.send(user)
@@ -39,7 +59,11 @@ router.patch("/users/:id", async (req, res) => {
   }
 
   try {
-    const user = await Users.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const user = await User.findById(req.params.id)
+    updates.forEach((update) => (user[update] = req.body[update]))
+
+    await user.save()
+
     if (!user) {
       return res.status(404).send()
     }
@@ -51,7 +75,7 @@ router.patch("/users/:id", async (req, res) => {
 
 router.delete("/users/:id", async (req, res) => {
   try {
-    const user = await Users.findByIdAndDelete(req.params.id)
+    const user = await User.findByIdAndDelete(req.params.id)
     if (!user) {
       return res.status(404).send()
     }

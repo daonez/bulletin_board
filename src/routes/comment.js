@@ -2,6 +2,15 @@ const express = require("express")
 const router = express.Router()
 const Comments = require("../models/comment")
 
+router.get("/comments", async (req, res) => {
+  const results = await Comments.find({})
+  try {
+    res.send(results)
+  } catch (e) {
+    res.status(500).send()
+  }
+})
+
 router.get("/comments/:id", async (req, res) => {
   const _id = req.params.id
 
@@ -37,7 +46,11 @@ router.patch("/comments/:id", async (req, res) => {
   }
 
   try {
-    const comment = await Comments.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const comment = await Posts.findById(req.params.id)
+    updates.forEach((update) => (comment[update] = req.body[update]))
+
+    await comment.save()
+
     if (!comment) {
       return res.status(404).send()
     }
