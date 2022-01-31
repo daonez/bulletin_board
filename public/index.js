@@ -1,6 +1,6 @@
-async function writePost(title,password, author, body, ) {
+async function writePost(title, password, author, content) {
   try {
-    const res = await axios.post("/post", { title, password, author, body })
+    const res = await axios.post("/post", { title, password, author, content })
 
     if (res.status === 204) {
       window.location.replace("/")
@@ -25,9 +25,9 @@ async function deletePost(id, password) {
   }
 }
 
-async function editPost(_id, title, body, password) {
+async function editPost(_id, title, content, password) {
   try {
-    const res = await axios.patch(`/${_id}`, { title, body, password })
+    const res = await axios.patch(`/${_id}`, { title, content, password })
 
     if (res.status === 204) {
       window.location.reload()

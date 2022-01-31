@@ -17,8 +17,8 @@
         />
       </p>
       <p>
-        <textarea name="body" id="body" readonly class="textarea-placeholder">
-<%= posts.body %></textarea
+        <textarea name="body" id="content" readonly class="textarea-placeholder">
+<%= posts.content %></textarea
         >
       </p>
       <div class="posts-placehoder">
@@ -43,7 +43,7 @@
         onclick="editPost(
      '<%= posts.id%>',
      document.getElementById('title').value,
-     document.getElementById('body').value,
+     document.getElementById('content').value,
      document.getElementById('password').value,
 
      

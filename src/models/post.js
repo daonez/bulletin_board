@@ -8,19 +8,16 @@ const postsSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
-  body: {
+  content: {
     type: String,
     required: true,
   },
-  password: {
-    type: String,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-  },
-  author: {
-    type: String,
-    required: true,
-    lowercase: true,
+    ref: "User",
   },
   createdAt: {
     type: Date,
@@ -30,19 +27,6 @@ const postsSchema = new mongoose.Schema({
     type: Date,
     default: () => new Date(),
   },
-})
-
-postsSchema.pre("save", function (next) {
-  this.updatedAt = Date.now()
-
-  next()
-})
-
-postsSchema.virtual("userId").get(function () {
-  return this._id.toHexString()
-})
-postsSchema.set("toJSON", {
-  virtuals: true,
 })
 
 module.exports = mongoose.model("Posts", postsSchema)
