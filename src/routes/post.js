@@ -21,14 +21,12 @@ router.get("/:id", async (req, res) => {
   }
 })
 
-router.post("/post", async (req, res) => {
-  const post = new Posts({
-    ...req.body,
-  })
+router.post("/posts", async (req, res) => {
+  const post = new Posts(req.body)
 
   try {
     await post.save()
-    res.status(204).send(post)
+    res.status(201).send(post)
   } catch (e) {
     console.log(e)
     res.status(400).send(e)

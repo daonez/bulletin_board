@@ -4,9 +4,12 @@ const connect = require("./models")
 const app = express()
 const port = 3000
 const Posts = require("./models/post")
+const User = require("./models/user")
+const Comments = require("./models/comment")
 
 const postsRouter = require("./routes/post")
 const usersRouter = require("./routes/user")
+const commentsRouter = require("./routes/comment")
 
 connect()
 
@@ -24,12 +27,30 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 //Router Middleware
-app.use("/api", [postsRouter, usersRouter])
+app.use("/api", [postsRouter, usersRouter, commentsRouter])
 
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts }).sort({ _id: -1 })
 
   res.render("index", { posts: results })
+})
+
+app.get("/users", async (req, res) => {
+  const results = await User.find({})
+  try {
+    res.send(results)
+  } catch (e) {
+    res.status(500).send()
+  }
+})
+
+app.get("/comments", async (req, res) => {
+  const results = await Comments.find({})
+  try {
+    res.send(results)
+  } catch (e) {
+    res.status(500).send()
+  }
 })
 
 app.listen(port, () => {

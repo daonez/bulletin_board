@@ -1,11 +1,7 @@
 const mongoose = require("mongoose")
 
-const postsSchema = new mongoose.Schema({
-  postNum: {
-    type: Number,
-  },
-
-  title: {
+const commentsSchema = new mongoose.Schema({
+  author: {
     type: String,
     required: true,
     trim: true,
@@ -29,4 +25,4 @@ const postsSchema = new mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model("Posts", postsSchema)
+module.exports = mongoose.model("Comments", commentsSchema)

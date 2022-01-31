@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 
-
-const UserSchema = new mongoose.Schema({
+const UsersSchema = new mongoose.Schema({
   author: {
     type: String,
     required: true,
@@ -12,14 +11,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+
   createdAt: {
     type: Date,
     default: () => new Date(),
@@ -30,10 +22,10 @@ const UserSchema = new mongoose.Schema({
   },
 })
 
-UserSchema.virtual("posts", {
-  ref: "Post",
-  localField: "_id",
-  foreignField: "owner",
-})
+// UserSchema.virtual("posts", {
+//   ref: "Post",
+//   localField: "_id",
+//   foreignField: "owner",
+// })
 
-module.exports = mongoose.model("User", UserSchema)
+module.exports = mongoose.model("Users", UsersSchema)
