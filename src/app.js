@@ -6,7 +6,7 @@ const port = 3000
 const Posts = require("./models/post")
 const User = require("./models/user")
 const Comments = require("./models/comment")
-
+const router = express.Router()
 const postsRouter = require("./routes/post")
 const usersRouter = require("./routes/user")
 const commentsRouter = require("./routes/comment")
@@ -27,7 +27,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 //Router Middleware
-app.use("/api", [postsRouter, usersRouter, commentsRouter])
+
+app.use("/", [postsRouter, usersRouter, commentsRouter])
 
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts }).sort({ _id: -1 })

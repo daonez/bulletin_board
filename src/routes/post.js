@@ -77,7 +77,7 @@ router.delete("/posts/:id", async (req, res) => {
     if (!post) {
       return res.status(404).send()
     }
-    res.send(post)
+    res.status(204).send(post)
   } catch (e) {
     res.status(500).send()
   }
