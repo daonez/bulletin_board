@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
 const userSchema = new mongoose.Schema({
   author: {
@@ -20,6 +21,14 @@ const userSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 
   createdAt: {
     type: Date,
@@ -45,10 +54,20 @@ userSchema.pre("save", async function (next) {
   next()
 })
 
+//인스턴스에 사용할 메서드
+userSchema.methods.makeAuthToken = async function () {
+  const user = this
+  const token = jwt.sign({ _id: user._id.toString() }, "thisisssecret")
+  //token:token  을 줄여서 token으로 shorthand방법사용
+  user.tokens = user.tokens.concat({ token })
+  await user.save()
+
+  return token
+}
+
 // 스키마 . statics 해서 메서드를 만들어서 사용 할 수있다. 아래 메서드는 비밀번호와 이메일정보가 일치하면 로그인하기 위해서 사용된다
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email })
-  console.log(user)
   if (!user) {
     throw new Error("로그인을 실패했습니다")
   }

@@ -4,7 +4,7 @@ const connect = require("./models")
 const app = express()
 const port = 3000
 const Posts = require("./models/post")
-
+//const jwt = require("jsonwebtoken")
 const postsRouter = require("./routes/post")
 const usersRouter = require("./routes/user")
 const commentsRouter = require("./routes/comment")
@@ -33,6 +33,15 @@ app.get("/", async (req, res) => {
 
   res.render("index", { posts: results })
 })
+
+// const myFunction = async () => {
+//   const token = jwt.sign({ _id: "abcd" }, "thisIsSecretKey", { expiresIn: "7days" })
+//   console.log(token)
+
+//   const data = jwt.verify(token, "thisIsSecretKey")
+//   console.log(data)
+// }
+// myFunction()
 
 app.listen(port, () => {
   console.log("running on port", port)
