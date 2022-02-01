@@ -5,5 +5,4 @@ function makeEditable() {
   })
   document.getElementById("editBtn").style.display = "inline-block"
   document.getElementById("makeEditable").style.display = "none"
-  console.log("makeEditable")
 }

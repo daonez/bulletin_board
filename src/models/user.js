@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const Posts = require("./post")
+const Comments = require("./comment")
 
 const userSchema = new mongoose.Schema({
   author: {
@@ -90,11 +92,19 @@ userSchema.statics.findByCredentials = async (email, password) => {
   return user
 }
 
-// UserSchema.virtual("posts", {
-//   ref: "Post",
-//   localField: "_id",
-//   foreignField: "owner",
-// })
+userSchema.virtual("posts", {
+  // 레퍼런스 글쓰기 , _id를 기준으로 주인확인
+  ref: "Posts",
+  localField: "_id",
+  foreignField: "owner",
+})
+
+userSchema.virtual("comments", {
+  // 레퍼런스 글쓰기 , _id를 기준으로 주인확인
+  ref: "Comments",
+  localField: "_id",
+  foreignField: "owner",
+})
 
 const User = mongoose.model("User", userSchema)
 

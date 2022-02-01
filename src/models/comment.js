@@ -10,11 +10,11 @@ const commentsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // owner: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: "User",
-  // },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
   createdAt: {
     type: Date,
     default: () => new Date(),
@@ -25,4 +25,5 @@ const commentsSchema = new mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model("Comments", commentsSchema)
+const Comments = mongoose.model("Comments", commentsSchema)
+module.exports = Comments
