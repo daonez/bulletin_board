@@ -8,7 +8,7 @@ const Posts = require("./models/post")
 const postsRouter = require("./routes/post")
 const usersRouter = require("./routes/user")
 const commentsRouter = require("./routes/comment")
-
+const auth = require("./middleware/auth")
 connect()
 
 // ejs세팅 (templates 폴더에서 필요한 내용들 읽기)
@@ -26,22 +26,13 @@ app.use(express.urlencoded({ extended: true }))
 
 //Router Middleware
 
-app.use("/", [postsRouter, usersRouter, commentsRouter])
+app.use("/", postsRouter, usersRouter, commentsRouter)
 
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts }).sort({ _id: -1 })
 
   res.render("index", { posts: results })
 })
-
-// const myFunction = async () => {
-//   const token = jwt.sign({ _id: "abcd" }, "thisIsSecretKey", { expiresIn: "7days" })
-//   console.log(token)
-
-//   const data = jwt.verify(token, "thisIsSecretKey")
-//   console.log(data)
-// }
-// myFunction()
 
 app.listen(port, () => {
   console.log("running on port", port)
