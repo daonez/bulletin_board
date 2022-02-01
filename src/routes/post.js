@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const Posts = require("../models/post")
+const auth = require("../middleware/auth")
 
-router.get("/write", async (req, res) => {
+router.get("/write", auth, async (req, res) => {
   res.render("createPost")
 })
 
@@ -21,8 +22,8 @@ router.get("/:id", async (req, res) => {
   }
 })
 
-router.post("/posts", async (req, res) => {
-  const post = new Posts(req.body)
+router.post("/posts", auth, async (req, res) => {
+  const post = new Posts({ ...req.body, owner: req.user._id })
 
   try {
     await post.save()

@@ -39,6 +39,17 @@ const userSchema = new mongoose.Schema({
   },
 })
 
+//toJSON 방법을 써서 password,tokens 삭제하여 client에게 안보이게한다!
+userSchema.methods.toJSON = function () {
+  const user = this
+  const userObject = user.toObject()
+  console.log(userObject)
+  delete userObject.password
+  delete userObject.tokens
+
+  return userObject
+}
+
 //pre 저장하기 전, post 저장후가있음
 //this를 사용하기 때문에 화살표 함수 불가
 // 미들웨어 이기 때문에 next가 없으면 무한로딩함 (작업을 끝낼떄까지 기다리때문)
