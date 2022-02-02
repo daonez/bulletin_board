@@ -4,7 +4,8 @@
   <body>
     <div class="section">
       <a> <%- include('../partials/nav.ejs') %> </a>
-      <div><%- include('./login.ejs') %></div>
+      <a href="/users/login"><button>login</button></a>
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <button
@@ -36,37 +37,8 @@
           </div>
         </div>
       </nav>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">제목</th>
-            <th scope="col">작성자</th>
-            <th scope="col">작성일</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for( let elements of posts ) { %>
-          <tr>
-            <th scope="row"><%= elements.postNum %></th>
-            <td>
-              <a href="/<%=elements._id%>"><p><%= elements.title %></p></a>
-            </td>
-            <td><%= elements.author %></td>
 
-            <td>
-              <div
-                class="timestamp"
-                data-timestamp="<%= elements.createdAt %>"
-                onload="test()"
-              ></div>
-            </td>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
-
-      <%- include('../partials/footer.ejs') %>
+      <%- include ('./board.ejs') %> <%- include('../partials/footer.ejs') %>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -78,7 +50,8 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"
       ></script>
-      <script src="index.js"></script>
+      <script src="login.js"></script>
+      <script src="posts.js"></script>
       <script src="time.js"></script>
     </div>
   </body>

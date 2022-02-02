@@ -26,13 +26,15 @@ app.use(express.urlencoded({ extended: true }))
 
 //Router Middleware
 
-app.use("/", postsRouter, usersRouter, commentsRouter)
+app.use("/", [postsRouter, usersRouter, commentsRouter])
 
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts }).sort({ _id: -1 })
 
   res.render("index", { posts: results })
 })
+
+
 
 app.listen(port, () => {
   console.log("running on port", port)

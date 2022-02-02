@@ -3,6 +3,11 @@ const router = express.Router()
 const User = require("../models/user")
 const auth = require("../middleware/auth")
 
+//로그인페이지
+router.get("/users/login", (req, res) => {
+  res.render("login")
+})
+
 //회원가입
 router.post("/users/signup", async (req, res) => {
   const user = new User(req.body)
@@ -56,21 +61,6 @@ router.get("/users/me", auth, async (req, res) => {
   // console.log(User)
   res.send(req.user)
 })
-
-// router.get("/users/:id", async (req, res) => {
-//   const _id = req.params.id
-//   console.log(_id)
-
-//   try {
-//     const user = await User.findById({ _id })
-//     if (!user) {
-//       return res.status(404).send()
-//     }
-//     res.send(user)
-//   } catch (e) {
-//     res.status(500).send()
-//   }
-// })
 
 //내정보 수정
 router.patch("/users/me", auth, async (req, res) => {
