@@ -48,7 +48,11 @@
       >
         삭제하기
       </button>
-
+      <div>
+        <% for( let comment of posts.comments) { %>
+        <div><%=comment.comment%></div>
+        <% } %>
+      </div>
       <div>
         <label for="comment">comment</label>
         <p><input type="text" name="comment" id="comment" /></p>

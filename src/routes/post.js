@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const Comments = require("../models/comment")
 const Posts = require("../models/post")
 const auth = require("../middleware/auth")
 
@@ -11,8 +12,9 @@ router.get("/posts/:id", async (req, res) => {
   const _id = req.params.id
 
   try {
-    const results = await Posts.findOne({ _id, ...Posts })
-
+    const results = await Posts.findById(_id)
+      .populate({ path: "comments", model: Comments })
+      .exec()
     if (!results) {
       res.status(404).send()
     }

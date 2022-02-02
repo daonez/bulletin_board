@@ -2,35 +2,18 @@ const express = require("express")
 const router = express.Router()
 const Comments = require("../models/comment")
 const auth = require("../middleware/auth")
-
-router.get("/comments", async (req, res) => {
-  const results = await Comments.find({})
-  try {
-    res.send(results)
-  } catch (e) {
-    res.status(500).send()
-  }
-})
-
-router.get("/comments/:id", async (req, res) => {
-  const _id = req.params.id
-
-  try {
-    const comment = await Comments.findById({ _id })
-    if (!comment) {
-      return res.status(404).send()
-    }
-    res.send(comment)
-  } catch (e) {
-    res.status(500).send()
-  }
-})
+const Posts = require("../models/post")
 
 router.post("/comments", auth, async (req, res) => {
   const { _id, comment } = req.body
   const comments = new Comments({ post: _id, comment, owner: req.user._id })
   try {
-    await comments.save()
+    const result = await comments.save()
+    await Posts.findByIdAndUpdate(
+      _id,
+      { $push: { comments: result } },
+      { new: true, useFindAndModify: false }
+    )
     res.status(201).send(comments)
   } catch (e) {
     console.log(e)
