@@ -4,19 +4,13 @@
   <body>
     <h1>registerPage</h1>
     <div>
-      <form action="/users/signup" method="POST">
-       <div>
+      <div>
         <label for="author">닉네임</label><br />
         <input type="text" id="author" name="author" placeholder="닉네임을 적어 주세요" />
       </div>
       <div>
         <label for="email">이메일</label><br />
-        <input
-          type="text"
-          id="email"
-          placeholder="hello@hello.com"
-          name="email"
-        />
+        <input type="text" id="email" placeholder="hello@hello.com" name="email" />
       </div>
       <div>
         <label for="password">비밀번호</label><br />
@@ -30,12 +24,11 @@
           type="submit"
           onclick="signup(
           document.getElementById('author').value,
-          document.getElementById('email').value, 
-     document.getElementById('password').value)"
+          document.getElementById('password').value,
+          document.getElementById('email').value)"
         >
           회원가입
         </button>
-      </form>
       </div>
     </div>
   </body>

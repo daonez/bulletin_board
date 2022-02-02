@@ -83,8 +83,9 @@ userSchema.statics.findByCredentials = async (email, password) => {
   if (!user) {
     throw new Error("로그인을 실패했습니다")
   }
-
+  console.log(password, user.password)
   const isMatch = await bcrypt.compare(password, user.password)
+
   if (!isMatch) {
     throw new Error("로그인을 실패했습니다")
   }

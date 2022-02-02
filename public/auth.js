@@ -25,8 +25,11 @@ async function registerPage() {
 async function login(email, password) {
   try {
     const res = await axios.post("/users/login", { email, password })
-    console.log(res)
-    if (res.status === 201) {
+    console.log(res.data.token)
+
+    if (res.status === 200) {
+      const { token } = res.data
+      localStorage.setItem("token", token)
       window.location.replace("/")
     }
   } catch (err) {
@@ -39,7 +42,7 @@ async function signup(author, password, email) {
     const res = await axios.post("/users/signup", { author, password, email })
     console.log(res)
     if (res.status === 201) {
-      window.location.replace("/")
+      window.location.replace("/users/login")
     }
   } catch (err) {
     console.log(err)
