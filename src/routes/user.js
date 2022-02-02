@@ -3,13 +3,19 @@ const router = express.Router()
 const User = require("../models/user")
 const auth = require("../middleware/auth")
 
-//로그인페이지
+//로그인페이지 보여주기
 router.get("/users/login", (req, res) => {
   res.render("login")
 })
 
-//회원가입
+//회원가입페이지 보여주기
+router.get("/users/signup", (req, res) => {
+  res.render("register")
+})
+
+//회원가입 시켜주기
 router.post("/users/signup", async (req, res) => {
+  console.log(req.body)
   const user = new User(req.body)
   const token = await user.makeAuthToken()
   try {
@@ -20,7 +26,7 @@ router.post("/users/signup", async (req, res) => {
   }
 })
 
-//로그인 라우터 endpoint
+//로그인 시켜주기
 router.post("/users/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password)

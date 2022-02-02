@@ -2,7 +2,28 @@
 <html lang="en">
   <%- include('../partials/header.ejs') %>
   <body>
-    <h1>hello</h1>
-    <p>adasd</p>
+    <h1>Login Page</h1>
+    <div>
+      <div>
+        <label for="email_address">이메일</label><br />
+        <input type="text" id="email_address" placeholder="hello@hello.com" />
+      </div>
+      <div>
+        <label for="password">비밀번호</label><br />
+        <input type="text" id="password" placeholder="비밀번호를 입력해주세요" />
+      </div>
+
+      <button
+        type="submit"
+        onclick="login(
+          document.getElementById('email_address').value, 
+     document.getElementById('password').value)"
+      >
+        로그인
+      </button>
+      <button type="submit" onclick="registerPage(console.log('hello?'))">회원가입</button>
+    </div>
+    <script src="login.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>
