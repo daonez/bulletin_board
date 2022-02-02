@@ -26,7 +26,9 @@ app.use(express.urlencoded({ extended: true }))
 
 //Router Middleware
 
-app.use("/", postsRouter, usersRouter, commentsRouter)
+app.use("/", postsRouter)
+app.use("/", usersRouter)
+app.use("/", commentsRouter)
 
 app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts })

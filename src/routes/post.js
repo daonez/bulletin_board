@@ -7,7 +7,7 @@ router.get("/write", async (req, res) => {
   res.render("createPost")
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/posts/:id", async (req, res) => {
   const _id = req.params.id
 
   try {
@@ -49,7 +49,9 @@ router.patch("/posts/:id", auth, async (req, res) => {
     // 위에 변경 가능한것들을 적용했으니 수정가능한 내용이 맞게 들어야하기 때문에 findById를 사용하여 매번 업데이트 할때마다
     //맞게 저장되게 설정해두었다.
     const post = await Posts.findById({ _id: req.params.id, owner: req.user._id })
-
+      .populate("owner", "author")
+      .exec()
+    console.log(post.populate("owner", "author"))
     if (!post) {
       return res.status(404).send()
     }
@@ -69,6 +71,9 @@ router.patch("/posts/:id", auth, async (req, res) => {
 router.delete("/posts/:id", auth, async (req, res) => {
   try {
     const post = await Posts.findByIdAndDelete({ _id: req.params.id, owner: req.user._id })
+      .populate("owner", "author")
+      .exec()
+    console.log(post.populate("owner", "author"))
     if (!post) {
       return res.status(404).send()
     }

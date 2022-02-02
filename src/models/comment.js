@@ -1,12 +1,7 @@
 const mongoose = require("mongoose")
 
 const commentsSchema = new mongoose.Schema({
-  author: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  content: {
+  comment: {
     type: String,
     required: true,
   },
@@ -23,6 +18,13 @@ const commentsSchema = new mongoose.Schema({
     type: Date,
     default: () => new Date(),
   },
+})
+
+commentsSchema.virtual("comments", {
+  // 레퍼런스 글쓰기 , _id를 기준으로 주인확인
+  ref: "User",
+  localField: "_id",
+  foreignField: "owner",
 })
 
 const Comments = mongoose.model("Comments", commentsSchema)

@@ -3,6 +3,7 @@ const User = require("../models/user")
 
 const auth = async (req, res, next) => {
   try {
+    console.log(req.header("Authorization"))
     const token = req.header("Authorization").replace("Bearer ", "")
 
     const decoded = jwt.verify(token, "thisisssecret")
@@ -16,6 +17,7 @@ const auth = async (req, res, next) => {
 
     next()
   } catch (e) {
+    console.log(e)
     res.status(401).send({ error: "로그인을 해주세요" })
   }
 }

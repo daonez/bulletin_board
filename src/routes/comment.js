@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Comments = require("../models/comment")
+const auth = require("../middleware/auth")
 
 router.get("/comments", async (req, res) => {
   const results = await Comments.find({})
@@ -25,8 +26,9 @@ router.get("/comments/:id", async (req, res) => {
   }
 })
 
-router.post("/comments", async (req, res) => {
-  const comment = new Comments(req.body)
+router.post("/comments", auth, async (req, res) => {
+  console.log(req.body)
+  const comment = new Comments({ ...req.body, owner: req.user._id })
   try {
     await comment.save()
     res.status(201).send(comment)
