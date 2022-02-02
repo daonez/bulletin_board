@@ -25,7 +25,7 @@ async function registerPage() {
 async function login(email, password) {
   try {
     const res = await axios.post("/users/login", { email, password })
-
+    console.log(res)
     if (res.status === 201) {
       window.location.replace("/")
     }

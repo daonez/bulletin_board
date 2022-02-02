@@ -4,17 +4,18 @@
   <body>
     <h1>registerPage</h1>
     <div>
-      <div>
+      <form action="/users/signup" method="POST">
+       <div>
         <label for="author">닉네임</label><br />
         <input type="text" id="author" name="author" placeholder="닉네임을 적어 주세요" />
       </div>
       <div>
-        <label for="email_address">이메일</label><br />
+        <label for="email">이메일</label><br />
         <input
           type="text"
-          id="email_address"
+          id="email"
           placeholder="hello@hello.com"
-          name="email_address"
+          name="email"
         />
       </div>
       <div>
@@ -29,14 +30,13 @@
           type="submit"
           onclick="signup(
           document.getElementById('author').value,
-          document.getElementById('email_address').value, 
+          document.getElementById('email').value, 
      document.getElementById('password').value)"
         >
           회원가입
         </button>
+      </form>
       </div>
     </div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="login.js"></script>
   </body>
 </html>
