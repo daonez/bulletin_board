@@ -29,8 +29,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/", postsRouter, usersRouter, commentsRouter)
 
 app.get("/", async (req, res) => {
-  const results = await Posts.find({ ...Posts }).sort({ _id: -1 })
-
+  const results = await Posts.find({ ...Posts })
+    .populate("owner", "author")
+    .exec()
+  console.log(results)
   res.render("index", { posts: results })
 })
 

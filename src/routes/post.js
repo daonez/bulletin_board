@@ -3,7 +3,7 @@ const router = express.Router()
 const Posts = require("../models/post")
 const auth = require("../middleware/auth")
 
-router.get("/write", auth, async (req, res) => {
+router.get("/write", async (req, res) => {
   res.render("createPost")
 })
 
