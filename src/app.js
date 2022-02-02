@@ -32,7 +32,6 @@ app.get("/", async (req, res) => {
   const results = await Posts.find({ ...Posts })
     .populate("owner", "author")
     .exec()
-  console.log(results)
   res.render("index", { posts: results })
 })
 
