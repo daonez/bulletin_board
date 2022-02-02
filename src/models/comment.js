@@ -18,6 +18,11 @@ const commentsSchema = new mongoose.Schema({
     type: Date,
     default: () => new Date(),
   },
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Post",
+  },
 })
 
 commentsSchema.virtual("comments", {
@@ -25,6 +30,12 @@ commentsSchema.virtual("comments", {
   ref: "User",
   localField: "_id",
   foreignField: "owner",
+})
+commentsSchema.virtual("comments", {
+  // 레퍼런스 글쓰기 , _id를 기준으로 주인확인
+  ref: "Post",
+  localField: "post",
+  foreignField: "_id",
 })
 
 const Comments = mongoose.model("Comments", commentsSchema)

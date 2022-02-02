@@ -8,12 +8,12 @@ async function checkToken() {
   }
 }
 
-async function writeComment(comment) {
+async function writeComment(_id, comment) {
   try {
     const token = localStorage.getItem("token")
     const res = await axios.post(
       "/comments",
-      { comment },
+      { _id, comment },
       {
         headers: {
           Authorization: "Bearer " + token,

@@ -27,11 +27,11 @@ router.get("/comments/:id", async (req, res) => {
 })
 
 router.post("/comments", auth, async (req, res) => {
-  console.log(req.body)
-  const comment = new Comments({ ...req.body, owner: req.user._id })
+  const { _id, comment } = req.body
+  const comments = new Comments({ post: _id, comment, owner: req.user._id })
   try {
-    await comment.save()
-    res.status(201).send(comment)
+    await comments.save()
+    res.status(201).send(comments)
   } catch (e) {
     console.log(e)
     res.status(400).send(e)

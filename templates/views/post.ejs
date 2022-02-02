@@ -54,7 +54,7 @@
         <p><input type="text" name="comment" id="comment" /></p>
         <button
           type="button"
-          onclick="writeComment(`${document.getElementById('comment').value}`)"
+          onclick="writeComment('<%=posts.id%>',document.getElementById('comment').value)"
         >
           작성
         </button>
