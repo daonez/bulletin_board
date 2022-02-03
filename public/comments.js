@@ -28,11 +28,11 @@ async function writeComment(_id, comment) {
   }
 }
 
-async function deleteComment(id, owner) {
+async function deleteComment(_id, owner) {
   try {
     checkToken()
     const token = localStorage.getItem("token")
-    const res = await axios.delete(`/posts/${id}`, {
+    const res = await axios.delete(`/comments/${_id}`, {
       data: { id, owner },
       headers: {
         Authorization: "Bearer " + token,
@@ -46,13 +46,13 @@ async function deleteComment(id, owner) {
   }
 }
 
-async function editComment(_id, title, content) {
+async function editComment(_id, owner, comment) {
   checkToken()
   const token = localStorage.getItem("token")
   try {
     const res = await axios.patch(
-      `/posts/${_id}`,
-      { title, content },
+      `/comments/${_id}`,
+      { _id, owner, comment },
       {
         headers: {
           Authorization: "Bearer " + token,

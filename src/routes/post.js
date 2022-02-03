@@ -28,13 +28,12 @@ router.get("/posts/:id", async (req, res) => {
 })
 
 router.post("/posts", auth, async (req, res) => {
-  const post = new Posts({ ...req.body, owner: req.user._id })
+  const post = await new Posts({ ...req.body, owner: req.user._id })
 
   try {
     await post.save()
     res.status(201).send(post)
   } catch (e) {
-    console.log(e)
     res.status(400).send(e)
   }
 })
@@ -56,7 +55,7 @@ router.patch("/posts/:id", auth, async (req, res) => {
     const post = await Posts.findById({ _id: req.params.id, owner: req.user._id })
       .populate("owner", "author")
       .exec()
-    console.log(post.populate("owner", "author"))
+
     if (!post) {
       return res.status(404).send()
     }
@@ -74,15 +73,20 @@ router.patch("/posts/:id", auth, async (req, res) => {
 })
 
 router.delete("/posts/:id", auth, async (req, res) => {
+  const { _id } = req.params.id
   try {
     const post = await Posts.findByIdAndDelete({ _id: req.params.id, owner: req.user._id })
-      .populate("owner", "author")
-      .exec()
-    console.log(post.populate("owner", "author"))
+
+    console.log(post)
+    const comments = await Comments.findByIdAndRemove({
+      _id: req.params.id,
+      owner: req.user._id,
+    })
+    console.log(comments)
     if (!post) {
       return res.status(404).send()
     }
-    res.status(204).send(post)
+    res.status(204).send({ post, comments })
   } catch (e) {
     res.status(500).send()
   }

@@ -43,7 +43,7 @@ async function deletePost(id, owner) {
       window.location.replace("/")
     }
   } catch (err) {
-    console.log(err)
+    //console.log(err)
   }
 }
 

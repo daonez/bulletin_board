@@ -15,9 +15,9 @@ router.get("/users/signup", (req, res) => {
 
 //회원가입 시켜주기
 router.post("/users/signup", async (req, res) => {
-  console.log(req.body)
+ 
   const user = new User(req.body)
-  console.log(user)
+
   const token = await user.makeAuthToken()
   try {
     await user.save({ user, token })
