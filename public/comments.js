@@ -7,12 +7,12 @@ async function checkToken() {
     return token
   }
 }
-async function writeComment(_id, comment) {
+async function writeComment(comment, comments_id, _id) {
   try {
     const token = localStorage.getItem("token")
     const res = await axios.post(
       "/comments",
-      { _id, comment },
+      { comment, comments_id, _id },
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -38,9 +38,9 @@ async function deleteComment(_id, owner) {
         Authorization: "Bearer " + token,
       },
     })
-    if (res.status === 204) {
-      window.location.replace("/")
-    }
+    // if (res.status === 204) {
+    //   window.location.replace("/")
+    // }
   } catch (err) {
     console.log(err)
   }
@@ -60,9 +60,9 @@ async function editComment(_id, owner, comment) {
       }
     )
 
-    if (res.status === 200) {
-      window.location.reload()
-    }
+    // if (res.status === 200) {
+    //   window.location.reload()
+    // }
   } catch (err) {
     console.log(err)
   }

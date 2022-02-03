@@ -7,8 +7,8 @@ const Posts = require("../models/post")
 router.post("/comments", auth, async (req, res) => {
   const { _id, comment, author } = req.body
   const comments = await new Comments({
-    post: _id,
     comment,
+    post: _id,
     owner: req.user._id,
     author,
   }).populate("owner", "author")
