@@ -18,8 +18,11 @@ router.get("/posts/:id", async (req, res) => {
     if (!results) {
       res.status(404).send()
     }
-    res.render("post", { posts: results })
+    const comments = await Comments.where("owner").populate("owner", "author").exec()
+    console.log(comments)
+    res.render("post", { posts: results, comments: comments })
   } catch (e) {
+    console.log(e)
     res.status(500).send()
   }
 })

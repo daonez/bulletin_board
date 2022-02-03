@@ -49,13 +49,17 @@
         삭제하기
       </button>
       <div>
-        <% for( let comment of posts.comments) { %>
-        <div><%=comment.comment%></div>
+        <% for( let comment of comments) { %>
+        <div>
+          <p>작성자: <span><%=comment.owner.author%></span></p>
+          <p>작성글:<%=comment.comment%></p>
+        </div>
+
         <% } %>
       </div>
       <div>
         <label for="comment">comment</label>
-        <p><input type="text" name="comment" id="comment" /></p>
+        <p><input type="text" name="comment" id="comment" data-id="<%=posts.owner%>" /></p>
         <button
           type="button"
           onclick="writeComment('<%=posts.id%>',document.getElementById('comment').value)"

@@ -5,18 +5,23 @@ const auth = require("../middleware/auth")
 const Posts = require("../models/post")
 
 router.post("/comments", auth, async (req, res) => {
-  const { _id, comment } = req.body
-  const comments = new Comments({ post: _id, comment, owner: req.user._id })
+  const { _id, comment, author } = req.body
+  const comments = await new Comments({
+    post: _id,
+    comment,
+    owner: req.user._id,
+    author,
+  }).populate("owner", "author")
   try {
     const result = await comments.save()
+
     await Posts.findByIdAndUpdate(
       _id,
       { $push: { comments: result } },
       { new: true, useFindAndModify: false }
-    )
-    res.status(201).send(comments)
+    ).populate("owner", "author")
+    res.status(201).send(result)
   } catch (e) {
-    console.log(e)
     res.status(400).send(e)
   }
 })

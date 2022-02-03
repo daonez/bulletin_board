@@ -7,7 +7,6 @@ async function checkToken() {
     return token
   }
 }
-
 async function writeComment(_id, comment) {
   try {
     const token = localStorage.getItem("token")
@@ -22,7 +21,7 @@ async function writeComment(_id, comment) {
     )
 
     if (res.status === 201) {
-      window.location.replace("/")
+      window.location.reload()
     }
   } catch (err) {
     console.log(err)
