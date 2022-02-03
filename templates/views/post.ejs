@@ -51,7 +51,7 @@
       <div>------------</div>
       <div>
         <div>
-          <% for( let comment of comments) { %>
+          <% for( let comment of commentsArray) { %>
           <p>작성자: <span><%=comment.owner.author%></span></p>
           <div>
             <p>작성글:<span><%=comment.comment%></span></p>
@@ -72,7 +72,7 @@
         <p><input type="text" name="comment" id="comment" data-id="<%=posts.owner%>" /></p>
         <button
           type="button"
-          onclick="writeComment(document.getElementById('comment').value,'<%=comments.comments_id%>','<%= posts._id%>')"
+          onclick="writeComment(document.getElementById('comment').value,'<%=posts.comments_id%>','<%= posts._id%>')"
         >
           작성
         </button>

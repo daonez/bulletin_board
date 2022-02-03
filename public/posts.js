@@ -21,9 +21,9 @@ async function writePost(title, content) {
       }
     )
 
-    // if (res.status === 201) {
-    //   window.location.replace("/")
-    // }
+    if (res.status === 201) {
+      window.location.replace("/")
+    }
   } catch (err) {
     console.log(err)
   }
