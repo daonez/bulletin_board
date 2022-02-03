@@ -19,14 +19,16 @@ router.get("/posts/:id", async (req, res) => {
     if (!results) {
       res.status(404).send()
     }
-    const test = await Comments.find({ comments: "author" }).populate("owner", "author").exec()
+    const findAuthor = await Comments.find({ comments: "author" })
+      .populate("owner", "author")
+      .exec()
     let commentsArray = []
-    const testResults = test.map((e) => {
+    const authorResults = findAuthor.map((e) => {
       if (e.post.toString() === _id) {
         commentsArray.push(e)
       }
     })
-    console.log(commentsArray)
+
     res.render("post", { posts: results, commentsArray })
   } catch (e) {
     console.log(e)

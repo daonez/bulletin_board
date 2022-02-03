@@ -20,26 +20,8 @@ async function writeComment(comment, comments_id, _id) {
       }
     )
 
-    if (res.status === 201) {
-      window.location.reload()
-    }
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-async function deleteComment(_id, owner) {
-  try {
-    checkToken()
-    const token = localStorage.getItem("token")
-    const res = await axios.delete(`/comments/${_id}`, {
-      data: { id, owner },
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-    // if (res.status === 204) {
-    //   window.location.replace("/")
+    // if (res.status === 201) {
+    //   window.location.reload()
     // }
   } catch (err) {
     console.log(err)
@@ -63,6 +45,24 @@ async function editComment(_id, owner, comment) {
     // if (res.status === 200) {
     //   window.location.reload()
     // }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function deleteComment(_id) {
+  try {
+    checkToken()
+    const token = localStorage.getItem("token")
+    const res = await axios.delete(`/comments/${_id}`, {
+      data: { _id },
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+    if (res.status === 200) {
+      window.location.reload()
+    }
   } catch (err) {
     console.log(err)
   }
