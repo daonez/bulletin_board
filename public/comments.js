@@ -20,9 +20,9 @@ async function writeComment(comment, comments_id, _id) {
       }
     )
 
-    // if (res.status === 201) {
-    //   window.location.reload()
-    // }
+    if (res.status === 201) {
+      window.location.reload()
+    }
   } catch (err) {
     console.log(err)
   }

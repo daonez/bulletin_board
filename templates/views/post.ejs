@@ -53,11 +53,11 @@
         <div>
           <% for( let comment of commentsArray) { %>
           <p>작성자: <span><%=comment.owner.author%></span></p>
-          <div>
-            <p>작성글:<span><%=comment.comment%></span></p>
+          <div id="element">
+            <p>작성글:<span name="comment" id="comment"><%=comment.comment%></span></p>
             <button
               type="button"
-              onclick="editComment('<%=posts._id%>','<%= comment.owner._id %>',document.getElementById('comment').value,)"
+              onclick="editComment('<%= comment._id%>','<%=comment.owner.id%>',document.getElementById('comment').value)"
             >
               수정
             </button>
